@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block extra_less %}
+	<link rel="stylesheet/less" href="{{ STATIC_URL }}less/post_list.less">
+{% endblock %}
+{% block content %}
+	{% include 'blog/post_item.html' %}
+	<h2>Comments:</h2>
+	{% for comment in comments %}
+		{% include 'blog/comment_item.html' %}
+	{% endfor %}
+	<form method='post'>{% csrf_token %}
+		<table class='span2'>
+			{{ comment_form }}
+		</table>
+		<input type='submit' />
+	</form>
+{% endblock %}
+

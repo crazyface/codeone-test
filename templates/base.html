@@ -2,12 +2,27 @@
 <html lang="en">
   <head>
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet/less" href="{{ STATIC_URL }}less/lib/bootstrap/bootstrap.less">
+    {% block extra_less %}
+    {% endblock %}
+   <script src="{{ STATIC_URL }}js/lib/less-1.2.1.min.js"></script>
     {% block extra_head %}
     {% endblock %}
   </head>
 
   <body>
-  	{% block content %}
-    {% endblock %}
+   <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">Code-on test</a>
+        </div>
+      </div>
+    </div>
+    <div class='container'>
+	    <div class="content">
+		  	{% block content %}
+		    {% endblock %}
+		</div>
+    </div>
   </body>
 </html>

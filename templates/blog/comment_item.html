@@ -1,0 +1,15 @@
+{% load gavatar %}
+
+<div class="row show-grid">
+	<div class="span8"><h3>{{ comment.name }}</h3></div>
+	<div class="span2"><small>at {{ post.created_at }}</small></div>
+</div>
+<div class="row show-grid">
+	<div class='span12 row'>
+  		{% gavatar comment.email %}
+		<span class='span7'>
+  			{{ comment.text }}
+		</span>
+  	</div>
+</div>
+<hr />

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block extra_less %}
+	<link rel="stylesheet/less" href="{{ STATIC_URL }}less/post_list.less">
+{% endblock %}
+{% block content %}
+
+	{% for post in object_list %}
+		{% include 'blog/post_item.html' %}
+	{% endfor %}
+{% endblock %}

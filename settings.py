@@ -1,7 +1,10 @@
 # Django settings for codeon project.
+from os import path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+ROOT_DIR = path.abspath(path.dirname(__file__))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -45,18 +48,19 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = path.join(ROOT_DIR, 'media/')
+print MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = path.join(ROOT_DIR, 'static_media/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -69,6 +73,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    path.join(ROOT_DIR, 'media/'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -89,7 +94,7 @@ SECRET_KEY = 'so_g07#kfoqvlte-4q_50$o6#y%b55g8rs86aa0rz%p7*d5_2s'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+#    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -98,11 +103,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'core.middleware.RequestHistory'
 )
 
 ROOT_URLCONF = 'codeon.urls'
 
 TEMPLATE_DIRS = (
+    path.join(ROOT_DIR, 'templates/'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -116,9 +123,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+     'django.contrib.admindocs',
+    'south',
+)
+
+INSTALLED_APPS += (
+    'codeon.blog',
+    'codeon.core',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -143,3 +156,9 @@ LOGGING = {
         },
     }
 }
+
+
+try:
+    from local_setting import *
+except:
+    pass
