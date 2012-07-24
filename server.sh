@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Replace these three settings.
-PROJNAME="codeone-test"
-PROJDIR="/home/alex/projects/$PROJNAME/"
+PROJNAME="codeone"
+PROJDIR="/var/lib/jenkins/workspace/$PROJNAME/"
+
 PIDFILE="$PROJDIR/$PROJNAME.pid"
 SOCKET="$PROJDIR/PROJNAME.sock"
 
